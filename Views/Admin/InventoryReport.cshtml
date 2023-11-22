@@ -1,0 +1,75 @@
+﻿
+
+@{
+    ViewData["Title"] = "Inventory Report";
+}
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-md-8 offset-md-2" style="border: 1px solid #000;">
+        <div class="text-center">
+            <br />
+            <div class="align-middle">
+                <img class="rounded-circle" src="~/images/logo.png" alt="logo" style="max-width: 130px" />
+            </div>
+            <br />
+            <h2>Inventory Report</h2>
+            <p>Date: @ViewBag.CurrentDate.ToString("yyyy-MM-dd")</p>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th>Model ID</th>
+                    <th>Aircraft Model Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (var item in Model)
+                    {*@
+                <tr>
+
+                    <td class="align-middle">
+                        1
+                    </td>
+                    <td class="align-middle">
+                        PPC Sprint Air ATR-72-500 1/100
+                    </td>
+                    <td class="align-middle">
+                        4500000
+                    </td>
+                    <td class="align-middle">
+                       100
+                    </td>
+
+
+
+                </tr>
+                <tr>
+
+                    <td class="align-middle">
+                        1
+                    </td>
+                    <td class="align-middle">
+                        PPC Sprint Air ATR-72-500 1/100
+                    </td>
+                    <td class="align-middle">
+                        4500000
+                    </td>
+                    <td class="align-middle">
+                        100
+                    </td>
+
+                </tr>
+                @* }*@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

@@ -1,0 +1,66 @@
+﻿@*@using eTickets.Data.ViewModels;
+    @model ShoppingCartVM*@
+
+@{
+    ViewData["Title"] = "Shopping cart summary";
+}
+
+<div class="row">
+    <br /><br /><br /><br />
+    <div class="col-md-8 offset-2" style="border: 1px solid #000;">
+        <div class="text-center">
+            <br /><br />
+            <h2>My Orders</h2><br /><br />
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Order Date</th>
+                    <th>Aircraft Model</th>
+                    <th>Price</th>
+                    <th>Order Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @*  @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
+        {*@
+                <tr>
+                    <td class="align-middle">1</td>
+                    <td class="align-middle">12-11-2023</td>
+                    <td class="align-middle"> PPC Sprint Air ATR-72-500 1/100</td>
+                    <td class="align-middle">4500000</td>
+                    <td class="align-middle">Manufacturing</td>
+
+
+                </tr>
+                <tr>
+                    <td class="align-middle">1</td>
+                    <td class="align-middle">12-11-2023</td>
+                    <td class="align-middle"> PPC Sprint Air ATR-72-500 1/100</td>
+                    <td class="align-middle">4500000</td>
+                    <td class="align-middle">Ready To Dispatch</td>
+
+                </tr>
+                <tr>
+                    <td class="align-middle">1</td>
+                    <td class="align-middle">12-11-2023</td>
+                    <td class="align-middle"> PPC Sprint Air ATR-72-500 1/100</td>
+                    <td class="align-middle">4500000</td>
+                    <td class="align-middle">Dispatched</td>
+
+                </tr>
+                @*}*@
+            </tbody>
+           
+        </table>
+
+        
+
+    </div>
+</div>
+
+ 
+}

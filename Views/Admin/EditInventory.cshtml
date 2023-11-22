@@ -1,0 +1,85 @@
+﻿@*@using eTickets.Data.ViewModels;
+    @model RegisterVM;
+*@
+@{
+    ViewData["Title"] = "Add Inventory";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="text-center">
+            <br /><br />
+            <h2>Edit Inventory</h2>
+        </div>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"] </span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2" style="border: 1px solid #000;">
+                <form asp-action="AddInventory">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label class="control-label">Model Image</label>
+                            <input type="file" class="form-control-file" name="modelImage" />
+                            <span class="text-danger"></span>
+                        </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group">
+                            <label class="control-label">Model Name</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group">
+                            <label class="control-label">Model Description</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">SKU</label>
+                        <input class="form-control" />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label class="control-label">Weight</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group">
+                            <label class="control-label">Base Price</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Max Price</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group">
+                            <label class="control-label">Model Price</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="form-group  ">
+                        <input class="btn btn-outline-success  btn-block bg-info text-white" type="submit" value="Update" />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

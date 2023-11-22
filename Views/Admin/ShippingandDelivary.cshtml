@@ -1,0 +1,91 @@
+﻿@*@using eTickets.Data.ViewModels;
+    @model RegisterVM;
+*@
+@{
+    ViewData["Title"] = "Update Order Status";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="text-center">
+
+            <h2>Shipping & Delivery</h2>
+        </div>
+        @if (TempData["Error"]
+!= null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"] </span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2" style="border: 1px solid #000;">
+                <form asp-action="AddInventory">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group font-weight-bold">
+                        <label class="control-label">Order ID : 1</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="form-group font-weight-bold">
+                        <label class="control-label">Order Date : 23-11-2023</label><br />
+                    </div>
+                    <div class="form-group font-weight-bold">
+                        <label class="control-label">Aircraft Model :  PPC Sprint Air ATR-72-500 1/100</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="form-group font-weight-bold">
+                        <label class="control-label">Price : 4500000</label>
+                    </div>
+                    <div class="form-row">
+
+
+
+                        <div class="form-group">
+                            <label class="control-label">Shipping Date</label>
+                            <input class="form-control" type="date" />
+                            <span class="text-danger"></span>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group">
+                            <label class="control-label">Delivary Date</label>
+                            <input class="form-control" type="date" />
+                            <span class="text-danger"></span>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group">
+                            <label class="control-label">Contact Number</label>
+                            <input class="form-control" type="date" />
+                            <span class="text-danger"></span>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group">
+                            <label class="control-label">Customer Address</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Tracking Number</label>
+                        <input class="form-control" type="text" id="trackingNumber" name="trackingNumber" readonly />
+                        <span class="text-danger"></span>
+                        <button type="button" onclick="generateTrackingNumber()">Generate Tracking Number</button>
+                    </div>
+                    <br />
+                    <div class="form-group  ">
+                        <input class="btn btn-outline-success  btn-block bg-info text-white" type="submit" value="Submit" />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function generateTrackingNumber() {
+        // Generate a unique tracking number (you can customize this logic)
+        var uniqueTrackingNumber = 'TN-' + Math.floor(Math.random() * 1000000);
+
+        // Set the generated tracking number in the input field
+        document.getElementById('trackingNumber').value = uniqueTrackingNumber;
+    }
+</script>

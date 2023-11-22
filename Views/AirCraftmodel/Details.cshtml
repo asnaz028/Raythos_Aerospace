@@ -1,0 +1,85 @@
+﻿@*@model Movie*@
+
+@{
+    ViewData["Title"] = "Movie details";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-dark">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                
+                                PPC Sprint Air ATR-72-500 1/100
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="~/images/A1.jpg" width="100%" alt=" ">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <b>Description: </b>
+                        <p class="card-text">
+                            Length: 20 cm
+
+                            Material: Plastic
+
+                            Brand: PPC
+                        </p>
+                        <p class="card-text">
+                            <b>SKU: </b>
+                            PP-SPRINT-ATR
+                        </p>
+
+                        <p class="card-text"><b>WEIGHT: </b>1.00 KGS</p>
+                        <p class="card-text"><b>SHIPPING: </b>Calculated at Checkout</p>
+                        <p class="card-text"><b>Price </b>Rs 4500000</p>
+                        <p class="card-text ">
+                            <b>Status: </b>
+
+                            <span class="badge bg-success text-white">AVAILABLE</span>
+
+                        </p>
+                        <p class="card-text" >
+                            <b> Order Customization : </b> <br />
+                            <b>Seating Configuration: </b>
+                            <input type="text" /><br /><br />
+                            <b>Interior Design: </b> 
+                            <input type="text" /><br /><br />
+                            <b>Additional Features: </b>
+                            <input type="text" />
+                            <hr />
+                            <div class="row">
+
+                                <div class="column text-center">
+                                    <img class="border-info rounded-circle" src=" " style="max-width: 150px" />
+                                    <br />
+
+                                </div>
+
+                            </div>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a class="btn btn-outline-primary float-right" asp-action="Index">
+                                Back to List
+                            </a>
+                            <a class="btn btn-success text-white"  
+                               asp-controller="AirCraftmodel"
+                               asp-action="ShoppingCart" asp-route-id="1 "><i class="bi bi-cart-plus"></i> Add to Cart (Price 4500000)</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

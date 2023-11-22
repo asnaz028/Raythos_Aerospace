@@ -1,0 +1,88 @@
+﻿
+
+@{
+    ViewData["Title"] = "Sales Report";
+}
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+ 
+<div class="row">
+    <br /><br />
+    <div class="col-md-8 offset-md-2" style="border: 1px solid #000;">
+        <div class="text-center">
+            <br />
+            <div class="align-middle">
+                <img class="rounded-circle" src="~/images/logo.png" alt="logo" style="max-width: 130px" />
+            </div>
+            <br /> 
+            <h2>Sales Report</h2>
+            <p>Date: @ViewBag.CurrentDate.ToString("yyyy-MM-dd")</p>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th>Sales ID</th>
+                    <th>Customer ID</th>
+                    <th>Order Date</th>
+                    <th>Aircraft Model ID</th>
+                    <th>Aircraft Model Name</th>
+                    <th>Sales Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (var item in Model)
+                    {*@
+                <tr>
+
+                    <td class="align-middle">
+                        1
+                    </td>
+                    <td class="align-middle">
+                        31
+                    </td>
+                    <td class="align-middle">
+                        22-11-2023
+                    </td>
+                    <td class="align-middle">
+                        2
+                    </td>
+                    <td class="align-middle">
+                        PPC Sprint Air ATR-72-500 1/100
+                    </td>
+                    <td class="align-middle">
+                        4500000
+                    </td>
+
+
+                </tr>
+                <tr>
+
+                    <td class="align-middle">
+                        1
+                    </td>
+                    <td class="align-middle">
+                        31
+                    </td>
+                    <td class="align-middle">
+                        22-11-2023
+                    </td>
+                    <td class="align-middle">
+                        2
+                    </td>
+                    <td class="align-middle">
+                        PPC Sprint Air ATR-72-500 1/100
+                    </td>
+                    <td class="align-middle">
+                        4500000
+                    </td>
+                </tr>
+                @* }*@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
