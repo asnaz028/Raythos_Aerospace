@@ -24,7 +24,7 @@
 
             <div class="row">
                 <div class="col-md-8 offset-2">
-                    <form asp-action="Login">
+                    <form asp-action="Login" id="myForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <div class="form-group">
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input class="btn btn-outline-info bg-info text-white float-right btn-block" type="submit" value="Log in"  onclick="Login()"/>
+                            <input class="btn btn-outline-info bg-info text-white float-right btn-block" type="submit" value="Log in"   />
 
                         </div>
                         <br /><br /><br /><br />
@@ -50,20 +50,18 @@
     </div>
 
 <script>
-    function Login(  ) {
-        // Your existing logic to add the item to the cart goes here
+    document.getElementById('myForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
 
-        // Show SweetAlert
+
+        // Display Sweet Alert
         Swal.fire({
-            title: 'Login Successful !',
+            title: 'Login Successfull !',
 
             icon: 'success',
-            confirmButtonText: 'OK',
-            onClose: () => {
-                setTimeout(() => {
-                    window.location.href = 'https://localhost:44353/UserAccount/Login';
-                }, 500000);  // Adjust the delay as needed (2000 milliseconds = 2 seconds)
-            }
+            confirmButtonText: 'OK'
         });
-    }
+
+
+    });
 </script>
