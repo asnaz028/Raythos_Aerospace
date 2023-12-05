@@ -55,12 +55,13 @@
                         <div class="card-footer ">
                             <p class="card-text">
                                 <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@*@item.Id*@">
-                                    <i class="bi bi-eye-fill"></i> Show Details
+                                    <i class="bi bi-eye-fill"></i> Customize Order
                                 </a>
                                 <a class="btn btn-success text-white @*@((DateTime.Now > item.EndDate) ? "disabled" : "")"*@
                                    asp-controller="AirCraftmodel"
-                                   asp-action="ShoppingCart"
-                                   asp-route-id="@*@item.Id*@">
+                                  @* asp-action="ShoppingCart"*@
+                                   asp-route-id="@*@item.Id*@"
+                                    onclick="addToCart('Aircraft Model', '4500000')">
                                     <i class="bi bi-cart-plus"></i> Add to Cart (Price 4500000 @*@item.Price.ToString("c")*@)
                                 </a>
                             </p>
@@ -122,12 +123,13 @@
                         <div class="card-footer ">
                             <p class="card-text">
                                 <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@*@item.Id*@">
-                                    <i class="bi bi-eye-fill"></i> Show Details
+                                    <i class="bi bi-eye-fill"></i> Customize Order
                                 </a>
                                 <a class="btn btn-success text-white @*@((DateTime.Now > item.EndDate) ? " disabled" : "" )"*@
-                                   asp-controller="AirCraftmodel"
-                                   asp-action="ShoppingCart"
-                                   asp-route-id="@*@item.Id*@">
+                                  @* asp-controller="AirCraftmodel"
+                                   asp-action="ShoppingCart"*@
+                                   asp-route-id="@*@item.Id*@"
+                                   onclick="addToCart('Aircraft Model', '4500000')">
                                     <i class="bi bi-cart-plus"></i> Add to Cart (Price 4500000 @*@item.Price.ToString("c")*@)
                                 </a>
                             </p>
@@ -140,5 +142,21 @@
         
    @* }*@
 </div>
+<script>
+    function addToCart(itemName, itemPrice ) {
+        // Your existing logic to add the item to the cart goes here
 
+        // Show SweetAlert
+        Swal.fire({
+            title: 'Item Added to Cart',
+            text: `${itemName} has been added to your cart.`,
+            icon: 'success',
+            confirmButtonText: 'OK',
+            onClose: () => {
+                // Redirect to the shopping cart page after the alert is closed
+                window.location.href = '/AirCraftmodel/ShoppingCart';  // Adjust the URL as needed
+            }
+        });
+    }
+</script>
 @*@await Html.PartialAsync("_CreateItem", "Movies") *@

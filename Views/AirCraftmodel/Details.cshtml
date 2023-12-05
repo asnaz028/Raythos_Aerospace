@@ -12,7 +12,7 @@
                     <div class="card-header text-white bg-dark">
                         <p class="card-text">
                             <h5 class="card-title">
-                                
+
                                 PPC Sprint Air ATR-72-500 1/100
                             </h5>
                         </p>
@@ -38,18 +38,21 @@
 
                         <p class="card-text"><b>WEIGHT: </b>1.00 KGS</p>
                         <p class="card-text"><b>SHIPPING: </b>Calculated at Checkout</p>
-                        <p class="card-text"><b>Price </b>Rs 4500000</p>
+                        <p class="card-text"><b>Price Per Item </b>Rs 4500000</p>
+                        <label class="card-text"><b>Enter Quantity</b></label>
+                        <input  class="card-text" type="number" id="quantity" oninput="updateTotalPrice()" placeholder="Enter quantity" value="1" min="1" />
+                        <p class="card-text"><b>Total Price:</b> <span id="totalPrice">Rs 4500000</span></p>
                         <p class="card-text ">
                             <b>Status: </b>
 
                             <span class="badge bg-success text-white">AVAILABLE</span>
 
                         </p>
-                        <p class="card-text" >
+                        <p class="card-text">
                             <b> Order Customization : </b> <br />
                             <b>Seating Configuration: </b>
                             <input type="text" /><br /><br />
-                            <b>Interior Design: </b> 
+                            <b>Interior Design: </b>
                             <input type="text" /><br /><br />
                             <b>Additional Features: </b>
                             <input type="text" />
@@ -73,13 +76,55 @@
                             <a class="btn btn-outline-primary float-right" asp-action="Index">
                                 Back to List
                             </a>
-                            <a class="btn btn-success text-white"  
-                               asp-controller="AirCraftmodel"
-                               asp-action="ShoppingCart" asp-route-id="1 "><i class="bi bi-cart-plus"></i> Add to Cart (Price 4500000)</a>
+                            <a class="btn btn-success text-white"
+                               @*asp-controller="AirCraftmodel"*@
+                               onclick="addToCart('Aircraft Model', '4500000')" asp-route-id="1"><i class="bi bi-cart-plus"></i> Add to Cart (Price 4500000)</a>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+<script>
+    function updateTotalPrice() {
+        // Get the quantity entered by the user
+        var quantity = document.getElementById('quantity').value;
+
+        // Convert the quantity to a number
+        quantity = parseInt(quantity);
+
+        // Check if the quantity is 1 or above
+        if (quantity >= 1) {
+            // Get the original price (assuming it's in Rupees)
+            var originalPrice = 4500000;
+
+            // Calculate the total price based on the quantity
+            var totalPrice = quantity * originalPrice;
+
+            // Update the total price in the HTML
+            document.getElementById('totalPrice').innerText = totalPrice;
+        } else {
+            // If the quantity is less than 1, set total price to 0 or display an error
+            document.getElementById('totalPrice').innerText = originalPrice;
+            // You can also display an error message to the user or handle it in another way
+        }
+    }
+
+    function addToCart(itemName, itemPrice) {
+        // Your existing logic to add the item to the cart goes here
+
+        // Show SweetAlert
+        Swal.fire({
+            title: 'Item Added to Cart',
+            text: `${itemName} has been added to your cart.`,
+            icon: 'success',
+            confirmButtonText: 'OK',
+            onClose: () => {
+                // Redirect to the shopping cart page after the alert is closed
+                window.location.href = '/AirCraftmodel/ShoppingCart';  // Adjust the URL as needed
+            }
+        });
+    }
+</script>

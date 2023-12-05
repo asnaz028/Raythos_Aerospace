@@ -76,7 +76,7 @@
 
         <div class="text-right">
             <div class="btn-group">
-                <a class="btn btn-outline-primary" asp-action="CompleteOrder">
+                <a class="btn btn-outline-primary" @*asp-action="CompleteOrder"*@ onclick="completeorder( )"  >
                         Complete order
                     </a>
                 <div id="paypal-btn"></div>
@@ -121,7 +121,7 @@
                     transactions: [{
                         amount: {
                             total: _total,
-                            currency: 'USD'
+                            currency: 'Rs'
                         }
                     }]
                 });
@@ -136,5 +136,21 @@
             }
 
         }, '#paypal-btn')
+
+        function completeorder( ) {
+            // Your existing logic to add the item to the cart goes here
+
+            // Show SweetAlert
+            Swal.fire({
+                title: 'Order Placed Successfully !',
+                 
+                icon: 'success',
+                confirmButtonText: 'OK',
+                
+            });
+        }
+
+
+
     </script>
 }

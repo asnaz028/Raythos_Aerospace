@@ -23,7 +23,7 @@
 
         <div class="row">
             <div class="col-md-8 offset-2" style="border: 1px solid #000;">
-                <form asp-action="AddInventory">
+                <form id="myForm" >
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group font-weight-bold">
                         <label class="control-label">Order ID : 1</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -61,8 +61,8 @@
                     </div>
 
 
-                    <div class="form-group  ">
-                        <input class="btn btn-outline-success  btn-block bg-info text-white" type="submit" value="Update" />
+                    <div class="form-group">
+                        <input class="btn btn-outline-success  btn-block bg-info text-white" type="submit" onclick="update()" value="Update" />
 
                     </div>
                 </form>
@@ -70,3 +70,19 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('myForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+
+        // Display Sweet Alert
+        Swal.fire({
+            title: 'Inventory Updated Successfully !',
+
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+
+
+    });
+</script>
