@@ -1,7 +1,12 @@
-﻿namespace Raythos_Aerospace.Models.entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Raythos_Aerospace.Models.entities
 {
     public class AircraftEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; } 
         public string ModelImage { get; set; } 
         public string ModelName { get; set; }

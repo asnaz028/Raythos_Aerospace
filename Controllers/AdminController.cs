@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Raythos_Aerospace.Models.ViewModels;
+using Raythos_Aerospace.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,13 @@ namespace Raythos_Aerospace.Controllers
 {
     public class AdminController : Controller
     {
+
+        private readonly IAircraftService _aircraftService;
+
+        public AdminController(IAircraftService aircraftService)
+        {
+            _aircraftService = aircraftService;
+        }
         public IActionResult Index()
         {
             return View();
@@ -32,6 +41,23 @@ namespace Raythos_Aerospace.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        async public Task<IActionResult> AddInventory([FromBody] AircraftViewModel model)
+        {
+
+            var result = await _aircraftService.CreateAircraftAsync(model);
+
+            if (!result)
+            {
+                TempData["Error"] = "Cannot create the item";
+            }
+
+            return View();
+            
+        }
+
+
         public IActionResult SalesReport()
         {
             DateTime currentDate = DateTime.Now;

@@ -15,11 +15,11 @@ namespace Raythos_Aerospace.Data
         public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<ShippingEntity> Shippings { get; set; }
 
-        // Add any additional DbSet properties as needed
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure relationships between entities (if any)
+          
             modelBuilder.Entity<OrderEntity>()
                 .HasOne(o => o.Customer)
                 .WithMany(u => u.Orders)
@@ -38,7 +38,7 @@ namespace Raythos_Aerospace.Data
                 .HasForeignKey(s => s.OrderId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Add any additional configurations as needed
+           
         }
 
     }

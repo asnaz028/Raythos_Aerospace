@@ -1,6 +1,12 @@
-﻿using Raythos_Aerospace.Data;
+﻿using Microsoft.IdentityModel.Tokens;
+using Raythos_Aerospace.Data;
 using Raythos_Aerospace.Models.entities;
 using Raythos_Aerospace.Models.ViewModels;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System;
 using System.Threading.Tasks;
 
 namespace Raythos_Aerospace.Services
@@ -30,6 +36,39 @@ namespace Raythos_Aerospace.Services
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<string> LoginUserAsync(LoginViewModel model)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.UserEmail == model.UserEmail);
+
+            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+            {
+                return null;
+            }
+
+            // Generate a random key with sufficient size (128 bits)
+            var keyGenerator = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            var keyBytes = new byte[16]; // 128 bits
+            keyGenerator.GetBytes(keyBytes);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.Email, user.UserEmail),
+                    // Add more claims as needed
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var encryptedToken = tokenHandler.WriteToken(token);
+
+            return encryptedToken;
         }
     }
 }

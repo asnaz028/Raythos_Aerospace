@@ -33,6 +33,7 @@ namespace Raythos_Aerospace
             services.AddControllersWithViews();
 
             services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IAircraftService, AircraftService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

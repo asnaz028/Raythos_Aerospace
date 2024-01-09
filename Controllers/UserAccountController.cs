@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Raythos_Aerospace.Models.ViewModels;
 using Raythos_Aerospace.Services;
 using System;
@@ -39,17 +41,41 @@ namespace Raythos_Aerospace.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return View();
             }
 
             var result = await _userManager.RegisterUserAsync(model);
 
             if (result)
             {
-                return Ok(new { Message = "Registration successful." });
+                return View();
             }
 
             return BadRequest(new { Message = "Registration failed." });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var result = await _userManager.LoginUserAsync(model);
+
+            if(result.IsNullOrEmpty())
+            {
+                TempData["Error"] = "Email or password is incorrect";
+                return View();
+            }
+
+            HttpContext.Session.SetString("AccessToken", result);
+            return View();
+
+        }
+
+
+
     }
 }
