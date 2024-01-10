@@ -8,6 +8,8 @@ using System.Security.Claims;
 using System.Text;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Raythos_Aerospace.Services
 {
@@ -69,6 +71,29 @@ namespace Raythos_Aerospace.Services
             var encryptedToken = tokenHandler.WriteToken(token);
 
             return encryptedToken;
+        }
+
+        public async Task<IEnumerable<UserEntity>> GetUsers()
+        {
+            // Retrieve all users from the database
+           var users =  await _context.Users.ToListAsync();
+            Console.WriteLine(users);
+            return users;
+        }
+
+        public async Task<bool> DeleteUserAsync(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                return false; // User not found
+            }
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return true; // User deleted successfully
         }
     }
 }

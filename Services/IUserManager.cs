@@ -1,4 +1,6 @@
-﻿using Raythos_Aerospace.Models.ViewModels;
+﻿using Raythos_Aerospace.Models.entities;
+using Raythos_Aerospace.Models.ViewModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Raythos_Aerospace.Services
@@ -8,5 +10,9 @@ namespace Raythos_Aerospace.Services
         Task<bool> RegisterUserAsync(RegisterViewModel model);
 
         Task<string> LoginUserAsync(LoginViewModel model);
+
+        Task<IEnumerable<UserEntity>> GetUsers();
+
+        Task<bool> DeleteUserAsync(int userId);
     }
 }

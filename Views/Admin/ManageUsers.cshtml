@@ -7,7 +7,10 @@
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+@model IEnumerable<Raythos_Aerospace.Models.entities.UserEntity>
 <div class="row">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <div class="col-md-8 offset-md-2" style="border: 1px solid #000;">
         <div class="text-center">
             <br /><br />
@@ -16,63 +19,71 @@
         <table class="table">
             <thead>
                 <tr>
-                    
                     <th>Name</th>
                     <th>Email</th>
                     <th>Actions</th>
-
                 </tr>
             </thead>
             <tbody>
-                @*@foreach (var item in Model)
-        {*@
-                <tr>
-
-                    <td class="align-middle">
-                        Tania mell
-                    </td>
-                    <td class="align-middle">
-                        Tani@gmail.com
-                    </td>
-
-                    <td class="align-middle">
-
-                        <a class="btn btn-danger text-white"  onclick="Delete()"  ><i class="bi bi-trash"></i>Delete </a>
-                    </td>
-
-                </tr>
-                <tr>
-
-                    <td class="align-middle">
-                        Tania mell
-                    </td>
-                    <td class="align-middle">
-                        Tani@gmail.com
-                    </td>
-
-                    <td class="align-middle">
-
-                        <a class="btn btn-danger text-white"   onclick="Delete()"   ><i class="bi bi-trash"></i>Delete </a>
-                    </td>
-
-                </tr>
-                @* }*@
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @user.UserName
+                        </td>
+                        <td class="align-middle">
+                            @user.UserEmail
+                        </td>
+                        <td class="align-middle">
+                            <a class="btn btn-danger text-white" onclick="deleteUser(@user.Id)"><i class="bi bi-trash"></i>Delete</a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 </div>
 
 <script>
-    function Delete(  ) {
-        // Your existing logic to add the item to the cart goes here
-
-        // Show SweetAlert
-        Swal.fire({
-            title: 'User Deleted Successfully !',
-
-            icon: 'success',
-            confirmButtonText: 'OK',
-            
+    function deleteUser(userId) {
+        // Send an AJAX request to delete the user
+        $.ajax({
+            url: '@Url.Action("DeleteUser", "Admin")', // Adjust the URL based on your controller and action names
+            type: 'POST',
+            data: { userId: userId },
+            success: function (data) {
+                if (data.success) {
+                    console.log('AJAX success:', data);
+                    // Show SweetAlert on success
+                    Swal.fire({
+                        title: 'User Deleted Successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reload the page
+                            location.reload();
+                        }
+                    });;
+                    // Optionally, you can refresh the page or update the UI here
+                } else {
+                    // Show SweetAlert with an error message if needed
+                    console.error('AJAX error:', error);
+                    Swal.fire({
+                        title: 'Error Deleting User!',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                    });
+                }
+            },
+            error: function () {
+                // Show SweetAlert with a generic error message
+                Swal.fire({
+                    title: 'An error occurred!',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                });
+            }
         });
     }
 </script>

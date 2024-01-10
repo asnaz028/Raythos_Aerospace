@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Raythos_Aerospace.Models.entities;
 using Raythos_Aerospace.Models.ViewModels;
 using Raythos_Aerospace.Services;
 using System;
@@ -12,9 +13,11 @@ namespace Raythos_Aerospace.Controllers
     {
 
         private readonly IAircraftService _aircraftService;
+        private readonly IUserManager _userManager;
 
-        public AdminController(IAircraftService aircraftService)
+        public AdminController(IAircraftService aircraftService, IUserManager userManager)
         {
+            _userManager = userManager;
             _aircraftService = aircraftService;
         }
         public IActionResult Index()
@@ -25,17 +28,21 @@ namespace Raythos_Aerospace.Controllers
         {
             return View();
         }
-        public IActionResult ManageUsers()
+        async public Task<IActionResult> ManageUsers()
         {
-            return View();
+            var users = await _userManager.GetUsers();
+            Console.WriteLine(users);
+
+            return View(users);
         }
         public IActionResult ManageOrders()
         {
             return View();
         }
-        public IActionResult ManageInventory()
+        async public Task<IActionResult> ManageInventory()
         {
-            return View();
+            var result = await _aircraftService.GetAircraftsAsync();
+            return View(result);
         }
         public IActionResult AddInventory()
         {
@@ -55,6 +62,30 @@ namespace Raythos_Aerospace.Controllers
 
             return View();
             
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> DeleteUser(int userId)
+        {
+            try
+            {
+                // Perform the user deletion logic using your UserManager
+                var success = await _userManager.DeleteUserAsync(userId);
+
+                if (success)
+                {
+                    return Json(new { success = true, message = "User deleted successfully" });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Error deleting user" });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                return Json(new { success = false, message = "An error occurred while deleting user" });
+            }
         }
 
 
@@ -80,6 +111,21 @@ namespace Raythos_Aerospace.Controllers
         {
              
             return View(id);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditInventory([FromBody] AircraftEntity model)
+        {
+            var result = await _aircraftService.EditAircraftAsync(model);
+
+            if (!result)
+            {
+                TempData["Error"] = "Cannot edit this aircraft";
+                return NotFound(); // Return an appropriate response when the aircraft cannot be edited
+            }
+
+            // Redirect to a different action or view after successful edit
+            return RedirectToAction("Index"); // Replace "Index" with the action or view you want to redirect to
         }
         public IActionResult UpdateOrderStatus(int id)
         {
