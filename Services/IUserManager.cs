@@ -7,9 +7,9 @@ namespace Raythos_Aerospace.Services
 {
     public interface IUserManager
     {
-        Task<bool> RegisterUserAsync(RegisterViewModel model);
+        Task<int> RegisterUserAsync(RegisterViewModel model);
 
-        Task<string> LoginUserAsync(LoginViewModel model);
+        Task<int> LoginUserAsync(LoginViewModel model);
 
         Task<IEnumerable<UserEntity>> GetUsers();
 

@@ -50,7 +50,7 @@ namespace Raythos_Aerospace.Controllers
         }
 
         [HttpPost]
-        async public Task<IActionResult> AddInventory([FromBody] AircraftViewModel model)
+        async public Task<IActionResult> AddInventory([FromForm] AircraftViewModel model)
         {
 
             var result = await _aircraftService.CreateAircraftAsync(model);
@@ -121,11 +121,11 @@ namespace Raythos_Aerospace.Controllers
             if (!result)
             {
                 TempData["Error"] = "Cannot edit this aircraft";
-                return NotFound(); // Return an appropriate response when the aircraft cannot be edited
+                return NotFound(); 
             }
 
-            // Redirect to a different action or view after successful edit
-            return RedirectToAction("Index"); // Replace "Index" with the action or view you want to redirect to
+           
+            return View();
         }
         public IActionResult UpdateOrderStatus(int id)
         {

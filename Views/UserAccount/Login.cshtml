@@ -1,5 +1,4 @@
-﻿@*@using eTickets.Data.ViewModels;
-@model LoginVM;*@
+﻿@model Raythos_Aerospace.Models.ViewModels.LoginViewModel
 
 @{
     ViewData["Title"] = "Log in to your account";
@@ -13,55 +12,55 @@
                 <img class="rounded-circle" src="~/images/logo.png" alt="logo" style="max-width: 130px" />
             </div>
             <h4>Log in to your account</h4>
+        </div>
+        <br /><br />
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"] </span>
             </div>
-            <br /><br />
-            @if (TempData["Error"] != null)
-            {
-                <div class="col-md-12 alert alert-danger">
-                    <span><b>Sorry!</b> - @TempData["Error"] </span>
-                </div>
-            }
+        }
 
-            <div class="row">
-                <div class="col-md-8 offset-2">
-                    <form asp-action="Login" id="myForm">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Login" id="myForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <div class="form-group">
-                            <label class="control-label">Username</label>
-                            <input class="form-control" />
-                            <span class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Password</label>
-                            <input class="form-control" />
-                            <span class="text-danger"></span>
-                        </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input class="form-control" asp-for="UserEmail" />
+                        <span asp-validation-for="UserEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <input class="form-control" type="password" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
 
-                        <div class="form-group">
-                            <input class="btn btn-outline-info bg-info text-white float-right btn-block" type="submit" value="Log in"   />
+                    <div class="form-group">
+                        <input class="btn btn-outline-info bg-info text-white float-right btn-block" type="submit" value="Log in" />
 
-                        </div>
-                        <br /><br /><br /><br />
-                    </form>
-                </div>
+                    </div>
+                    <br /><br /><br /><br />
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 <script>
     document.getElementById('myForm').addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent the default form submission
-
+        window.location.href = '/'
 
         // Display Sweet Alert
         Swal.fire({
-            title: 'Login Successfull !',
-
+            title: 'Login Successful!',
             icon: 'success',
             confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+               window.location.href = '/'
+            }
         });
-
-
     });
 </script>

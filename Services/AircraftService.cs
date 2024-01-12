@@ -20,7 +20,7 @@ namespace Raythos_Aerospace.Services
         {
             var aircraftEntity = new AircraftEntity
             {
-                ModelImage = aircraftViewModel.ModelImage,
+                ModelImage = aircraftViewModel.ModelImage.FileName,
                 ModelName = aircraftViewModel.ModelName,
                 ModelDescription = aircraftViewModel.ModelDescription,
                 SKU = aircraftViewModel.SKU,

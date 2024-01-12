@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,10 +27,23 @@ namespace Raythos_Aerospace
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+          
+
+            services.AddMvc();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
             services.AddDbContext<RaythosContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DBContext"));
             });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddControllersWithViews();
 
             services.AddScoped<IUserManager, UserManager>();
@@ -49,12 +63,19 @@ namespace Raythos_Aerospace
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseCookiePolicy();
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //enable session before MVC
+            app.UseSession();
+
+           
 
             app.UseEndpoints(endpoints =>
             {

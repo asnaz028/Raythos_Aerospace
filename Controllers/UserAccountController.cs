@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Raythos_Aerospace.Controllers
 {
@@ -37,8 +38,12 @@ namespace Raythos_Aerospace.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
+        public async Task<IActionResult> Register([FromForm] RegisterViewModel model)
         {
+            /*if (HttpContext.Session.GetString("AccessToken") != null)
+            {
+                return RedirectToAction("Index", "Home"); // Redirect to '/' route
+            }*/
             if (!ModelState.IsValid)
             {
                 return View();
@@ -46,17 +51,23 @@ namespace Raythos_Aerospace.Controllers
 
             var result = await _userManager.RegisterUserAsync(model);
 
-            if (result)
+            if (result == 0)
             {
+                TempData["Error"] = "Cannot register the user";
                 return View();
             }
 
-            return BadRequest(new { Message = "Registration failed." });
+            
+            return RedirectToAction("Index", "");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
+        public async Task<IActionResult> Login([FromForm] LoginViewModel model)
         {
+            if (HttpContext.Session.GetString("AccessToken") != null)
+            {
+                return RedirectToAction("Index", "Home"); // Redirect to '/' route
+            }
             if (!ModelState.IsValid)
             {
                 return View();
@@ -64,14 +75,16 @@ namespace Raythos_Aerospace.Controllers
 
             var result = await _userManager.LoginUserAsync(model);
 
-            if(result.IsNullOrEmpty())
+            if(result == 0)
             {
                 TempData["Error"] = "Email or password is incorrect";
                 return View();
             }
 
-            HttpContext.Session.SetString("AccessToken", result);
-            return View();
+            ViewBag.UserId = result;
+
+            HttpContext.Session.SetString("AccessToken", result.ToString());
+            return RedirectToAction("Index", "");
 
         }
 

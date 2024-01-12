@@ -22,7 +22,7 @@ namespace Raythos_Aerospace.Services
             _context = context;
         }
 
-        public async Task<bool> RegisterUserAsync(RegisterViewModel model)
+        public async Task<int> RegisterUserAsync(RegisterViewModel model)
         {
            
             var userEntity = new UserEntity
@@ -37,40 +37,21 @@ namespace Raythos_Aerospace.Services
             _context.Users.Add(userEntity);
             await _context.SaveChangesAsync();
 
-            return true;
+            return userEntity.Id;
         }
 
-        public async Task<string> LoginUserAsync(LoginViewModel model)
+        public async Task<int> LoginUserAsync(LoginViewModel model)
         {
-            var user = _context.Users.SingleOrDefault(u => u.UserEmail == model.UserEmail);
+            var user = _context.Users.FirstOrDefault(u => u.UserEmail == model.UserEmail);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
-                return null;
+                return 0;
             }
 
-            // Generate a random key with sufficient size (128 bits)
-            var keyGenerator = new System.Security.Cryptography.RNGCryptoServiceProvider();
-            var keyBytes = new byte[16]; // 128 bits
-            keyGenerator.GetBytes(keyBytes);
+            
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-            new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.Email, user.UserEmail),
-                    // Add more claims as needed
-                }),
-                Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var encryptedToken = tokenHandler.WriteToken(token);
-
-            return encryptedToken;
+            return user.Id;
         }
 
         public async Task<IEnumerable<UserEntity>> GetUsers()

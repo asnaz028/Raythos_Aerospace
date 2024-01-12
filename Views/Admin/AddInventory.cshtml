@@ -7,6 +7,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+@model Raythos_Aerospace.Models.ViewModels.AircraftViewModel
 <div class="row" >
     <div class="col-md-6 offset-3">
         <div class="text-center">
@@ -23,60 +24,59 @@
 
         <div class="row">
             <div class="col-md-8 offset-2" style="border: 1px solid #000;">
-                <form  >
+                <form method="post" asp-action="AddInventory" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-row">
-
                         <div class="form-group">
                             <label class="control-label">Model Image</label>
-                            <input type="file" class="form-control-file" name="modelImage" />
+                            <input type="file" class="form-control-file" name="ModelImage" />
                             <span class="text-danger"></span>
-                        </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+
                         <div class="form-group">
                             <label class="control-label">Model Name</label>
-                            <input class="form-control" />
-                            <span class="text-danger"></span>
-                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input class="form-control" asp-for="ModelName" />
+                            <span asp-validation-for="ModelName" class="text-danger"></span>
+                        </div>
+
                         <div class="form-group">
                             <label class="control-label">Model Description</label>
-                            <input class="form-control" />
-                            <span class="text-danger"></span>
-                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        
+                            <input class="form-control" asp-for="ModelDescription" />
+                            <span asp-validation-for="ModelDescription" class="text-danger"></span>
+                        </div>
 
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">SKU</label>
-                        <input class="form-control" />
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="control-label">SKU</label>
+                            <input class="form-control" asp-for="SKU" />
+                            <span asp-validation-for="SKU" class="text-danger"></span>
+                        </div>
 
                         <div class="form-group">
                             <label class="control-label">Weight</label>
-                            <input class="form-control" />
-                            <span class="text-danger"></span>
-                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input class="form-control" asp-for="Weight" />
+                            <span asp-validation-for="Weight" class="text-danger"></span>
+                        </div>
+
                         <div class="form-group">
                             <label class="control-label">Base Price</label>
-                            <input class="form-control" />
-                            <span class="text-danger"></span>
+                            <input class="form-control" asp-for="BasePrice" />
+                            <span asp-validation-for="BasePrice" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
                             <label class="control-label">Max Price</label>
-                            <input class="form-control" />
-                            <span class="text-danger"></span>
-                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="form-group">
-                            <label class="control-label">Model Price</label>
-                            <input class="form-control" />
-                            <span class="text-danger"></span>
+                            <input class="form-control" asp-for="MaxPrice" />
+                            <span asp-validation-for="MaxPrice" class="text-danger"></span>
                         </div>
 
+                        <div class="form-group">
+                            <label class="control-label">Model Price</label>
+                            <input class="form-control" asp-for="Price" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group  ">
-                        <input class="btn btn-outline-success  btn-block bg-info text-white" type="submit" onclick="Add()" value="Save" />
-
+                    <div class="form-group">
+                        <input class="btn btn-outline-success btn-block bg-info text-white" type="submit" value="Save" />
                     </div>
                 </form>
             </div>
