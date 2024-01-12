@@ -4,6 +4,8 @@ using Raythos_Aerospace.Models.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System;
 
 namespace Raythos_Aerospace.Services
 {
@@ -41,6 +43,38 @@ namespace Raythos_Aerospace.Services
         {
             // Retrieve all aircraft from the database
             return await _context.Aircrafts.ToListAsync();
+        }
+
+
+        public async Task<IEnumerable<OrderEntity>> GetOrdersAsync()
+        {
+            var orders = await _context.Orders
+       .Where(o => o.OrderStatus == "Cart")
+       .Include(o => o.AircraftModel)
+       .ToListAsync();
+
+            return orders;
+
+        }
+
+        public async Task AddToCartAsync(int aircraftModelId, int userId, decimal price, string seatingConfiguration, string interiorDesign, string additionalFeatures, int quantity)
+        {
+            var order = new OrderEntity
+            {
+                AircraftModelId = aircraftModelId,
+                CustomerId = userId,
+                OrderDate = DateTime.UtcNow,
+                Price = price,
+                OrderStatus = "Cart",
+                SeatingConfiguration = seatingConfiguration,
+                InteriorDesign = interiorDesign,
+                AdditionalFeatures = additionalFeatures,
+                Quantity = quantity
+                // Include other necessary properties
+            };
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> EditAircraftAsync(AircraftEntity updatedAircraft)

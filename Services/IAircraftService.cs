@@ -12,5 +12,9 @@ namespace Raythos_Aerospace.Services
         Task<bool> EditAircraftAsync(AircraftEntity aircraft);
 
         Task<IEnumerable<AircraftEntity>> GetAircraftsAsync();
+
+        Task<IEnumerable<OrderEntity>> GetOrdersAsync();
+
+        Task AddToCartAsync(int aircraftModelId, int userId, decimal price, string seatingConfiguration, string interiorDesign, string additionalFeatures, int quantity);
     }
 }

@@ -21,6 +21,7 @@ namespace Raythos_Aerospace.Models.entities
         public int Quantity { get; set; }
 
         public UserEntity Customer { get; set; } 
+        //expand aircraft entity get the name
         public AircraftEntity AircraftModel { get; set; }
     }
 }

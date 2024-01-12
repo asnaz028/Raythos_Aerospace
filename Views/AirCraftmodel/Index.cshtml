@@ -38,13 +38,12 @@
                     <div class="col-md-12">
                         <div class="card-footer ">
                             <p class="card-text">
-                                <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id">
-                                    <i class="bi bi-eye-fill"></i> Customize Order
-                                </a>
                                 <a class="btn btn-success text-white"
-                                   asp-controller="AirCraftmodel"
-                                   asp-route-id="@item.Id"
-                                   onclick="addToCart('@item.ModelName', '@item.BasePrice')">
+                                   href="#"
+                                   data-aircraft-model-id="@item.Id"
+                                   data-price="@item.BasePrice"
+                                   data-quantity="1"
+                                   onclick="addToCart(this, '@item.ModelName', '@item.BasePrice')">
                                     <i class="bi bi-cart-plus"></i> Add to Cart (Price @item.BasePrice.ToString("c"))
                                 </a>
                             </p>
@@ -56,18 +55,36 @@
     }
 </div>
 <script>
-    function addToCart(itemName, itemPrice) {
-        // Your existing logic to add the item to the cart goes here
+    function addToCart(clickedElement, itemName, itemPrice) {
+        var aircraftModelId = $(clickedElement).data('aircraft-model-id');
+        var price = $(clickedElement).data('price');
+        var quantity = $(clickedElement).data('quantity');
 
-        // Show SweetAlert
-        Swal.fire({
-            title: 'Item Added to Cart',
-            text: `${itemName} has been added to your cart.`,
-            icon: 'success',
-            confirmButtonText: 'OK',
-            onClose: () => {
-                // Redirect to the shopping cart page after the alert is closed
-                window.location.href = '/AirCraftmodel/ShoppingCart';  // Adjust the URL as needed
+        // Use AJAX to add the item to the cart
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AddToCart", "AirCraftmodel")',
+            data: {
+                aircraftModelId: aircraftModelId,
+                price: price,
+                quantity: quantity
+            },
+            success: function (data) {
+                // Handle success, for example, show a confirmation message
+                Swal.fire({
+                    title: 'Item Added to Cart',
+                    text: `${itemName} has been added to your cart.`,
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    onClose: function () {
+                        // Redirect to the shopping cart page after the alert is closed
+                        window.location.href = '/AirCraftmodel/ShoppingCart';  // Adjust the URL as needed
+                    }
+                });
+            },
+            error: function (error) {
+                // Handle error
+                console.error(error);
             }
         });
     }

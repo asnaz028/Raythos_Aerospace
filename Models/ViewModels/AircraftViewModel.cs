@@ -15,4 +15,14 @@ namespace Raythos_Aerospace.Models.ViewModels
         public decimal Price { get; set; }
         public bool IsSold { get; set; }
     }
+
+    public class CartItemData
+    {
+        public int AircraftModelId { get; set; }
+        public decimal Price { get; set; }
+        public string? SeatingConfiguration { get; set; }
+        public string? InteriorDesign { get; set; }
+        public string? AdditionalFeatures { get; set; }
+        public int Quantity { get; set; }
+    }
 }

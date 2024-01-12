@@ -57,7 +57,7 @@ namespace Raythos_Aerospace.Controllers
                 return View();
             }
 
-            
+            HttpContext.Session.SetString("AccessToken", result.ToString());
             return RedirectToAction("Index", "");
         }
 
@@ -80,8 +80,6 @@ namespace Raythos_Aerospace.Controllers
                 TempData["Error"] = "Email or password is incorrect";
                 return View();
             }
-
-            ViewBag.UserId = result;
 
             HttpContext.Session.SetString("AccessToken", result.ToString());
             return RedirectToAction("Index", "");
