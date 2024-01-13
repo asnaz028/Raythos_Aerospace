@@ -90,17 +90,21 @@ namespace Raythos_Aerospace.Controllers
         }
 
 
-        public IActionResult SalesReport()
+        async public Task<IActionResult> SalesReport()
         {
+
+            var orders = await _aircraftService.GetOrdersAsync("Done");
+
             DateTime currentDate = DateTime.Now;
             ViewBag.CurrentDate = currentDate;
-            return View();
+            return View(orders);
         }
-        public IActionResult InventoryReport()
+        async public Task<IActionResult> InventoryReport()
         {
+            var inventory = await _aircraftService.GetAircraftsAsync();
             DateTime currentDate = DateTime.Now;
             ViewBag.CurrentDate = currentDate;
-            return View();
+            return View(inventory);
         }
         public IActionResult CustomerCustomizationReport()
         {

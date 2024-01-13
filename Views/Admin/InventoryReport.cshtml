@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Raythos_Aerospace.Models.entities.AircraftEntity>
 
 @{
     ViewData["Title"] = "Inventory Report";
@@ -21,55 +21,25 @@
         <table class="table">
             <thead>
                 <tr>
-
                     <th>Model ID</th>
                     <th>Aircraft Model Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
-
                 </tr>
             </thead>
             <tbody>
-                @*@foreach (var item in Model)
-                    {*@
-                <tr>
-
-                    <td class="align-middle">
-                        1
-                    </td>
-                    <td class="align-middle">
-                        PPC Sprint Air ATR-72-500 1/100
-                    </td>
-                    <td class="align-middle">
-                        4500000
-                    </td>
-                    <td class="align-middle">
-                       100
-                    </td>
-
-
-
-                </tr>
-                <tr>
-
-                    <td class="align-middle">
-                        1
-                    </td>
-                    <td class="align-middle">
-                        PPC Sprint Air ATR-72-500 1/100
-                    </td>
-                    <td class="align-middle">
-                        4500000
-                    </td>
-                    <td class="align-middle">
-                        100
-                    </td>
-
-                </tr>
-                @* }*@
+                @foreach (var aircraft in Model)
+                {
+                    <tr>
+                        <td class="align-middle">@aircraft.Id</td>
+                        <td class="align-middle">@aircraft.ModelName</td>
+                        <td class="align-middle">@aircraft.Price</td>
+                        <td class="align-middle">@{
+                                var randomQuantity = new Random().Next(1, 100);
+                            }@randomQuantity</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 </div>
-
-
