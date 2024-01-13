@@ -49,7 +49,9 @@ namespace Raythos_Aerospace.Services
                 return 0;
             }
 
-            
+            _context.Orders.RemoveRange(_context.Orders);
+
+            await _context.SaveChangesAsync();
 
             return user.Id;
         }

@@ -29,8 +29,15 @@
                             <p class="card-text"><b>Price </b>Rs @item.BasePrice</p>
                             <p class="card-text ">
                                 <b>Status: </b>
-                               
+
+                                @if (@item.IsSold)
+                                {
+                                    <span class="badge bg-danger text-white">UNAVAILABLE</span>
+                                }
+                                else
+                                {
                                     <span class="badge bg-success text-white">AVAILABLE</span>
+                                }
                                
                             </p>
                         </div>
