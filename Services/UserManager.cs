@@ -49,7 +49,8 @@ namespace Raythos_Aerospace.Services
                 return 0;
             }
 
-            _context.Orders.RemoveRange(_context.Orders);
+            var cartOrders = _context.Orders.Where(o => o.OrderStatus == "Cart");
+            _context.Orders.RemoveRange(cartOrders);
 
             await _context.SaveChangesAsync();
 
