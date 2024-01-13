@@ -93,7 +93,7 @@ namespace Raythos_Aerospace.Services
             };
 
             _context.Orders.Add(order);
-            await git _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> EditAircraftAsync(AircraftEntity updatedAircraft)
