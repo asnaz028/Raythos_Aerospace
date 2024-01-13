@@ -53,6 +53,9 @@
                                    onclick="addToCart(this, '@item.ModelName', '@item.BasePrice')">
                                     <i class="bi bi-cart-plus"></i> Add to Cart (Price @item.BasePrice.ToString("c"))
                                 </a>
+                                <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@*@item.Id*@">
+                                    <i class="bi bi-eye-fill"></i> Customize Order
+                                </a>
                             </p>
                         </div>
                     </div>
