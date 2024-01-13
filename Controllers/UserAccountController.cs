@@ -14,10 +14,12 @@ namespace Raythos_Aerospace.Controllers
     public class UserAccountController : Controller
     {
         private readonly IUserManager _userManager;
+        private readonly IAircraftService _aircraftService;
 
-        public UserAccountController(IUserManager userManager)
+        public UserAccountController(IUserManager userManager, IAircraftService aircraftService)
         {
             _userManager = userManager;
+            _aircraftService = aircraftService;
         }
 
         public IActionResult Index()
@@ -32,9 +34,10 @@ namespace Raythos_Aerospace.Controllers
         {
             return View();
         }
-        public IActionResult CustomerProfile()
+        async public Task<IActionResult> CustomerProfile()
         {
-            return View();
+            var orders = await _aircraftService.GetOrdersAsync("Orderd");
+            return View(orders);
         }
 
         [HttpPost]

@@ -1,8 +1,7 @@
-﻿@*@using eTickets.Data.ViewModels;
-    @model ShoppingCartVM*@
+﻿@model List<Raythos_Aerospace.Models.entities.OrderEntity>
 
 @{
-    ViewData["Title"] = "Shopping cart summary";
+    ViewData["Title"] = "My Orders";
 }
 
 <div class="row">
@@ -25,42 +24,17 @@
                 </tr>
             </thead>
             <tbody>
-                @*  @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
-        {*@
-                <tr>
-                    <td class="align-middle">1</td>
-                    <td class="align-middle">12-11-2023</td>
-                    <td class="align-middle"> PPC Sprint Air ATR-72-500 1/100</td>
-                    <td class="align-middle">4500000</td>
-                    <td class="align-middle">Manufacturing</td>
-
-
-                </tr>
-                <tr>
-                    <td class="align-middle">1</td>
-                    <td class="align-middle">12-11-2023</td>
-                    <td class="align-middle"> PPC Sprint Air ATR-72-500 1/100</td>
-                    <td class="align-middle">4500000</td>
-                    <td class="align-middle">Ready To Dispatch</td>
-
-                </tr>
-                <tr>
-                    <td class="align-middle">1</td>
-                    <td class="align-middle">12-11-2023</td>
-                    <td class="align-middle"> PPC Sprint Air ATR-72-500 1/100</td>
-                    <td class="align-middle">4500000</td>
-                    <td class="align-middle">Dispatched</td>
-
-                </tr>
-                @*}*@
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td class="align-middle">@order.Id</td>
+                        <td class="align-middle">@order.OrderDate.ToString("dd-MM-yyyy")</td>
+                        <td class="align-middle">@order.AircraftModel.ModelName</td>
+                        <td class="align-middle">@order.Price</td>
+                        <td class="align-middle">@order.OrderStatus</td>
+                    </tr>
+                }
             </tbody>
-           
         </table>
-
-        
-
     </div>
 </div>
-
- 
-}
