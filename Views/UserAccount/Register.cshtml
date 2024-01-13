@@ -30,32 +30,32 @@
                 <form asp-action="Register" method="post" id="myForm">
                 <div class="form-group">
                     <label class="control-label">Username</label>
-                    <input class="form-control" asp-for="UserName" />
+                    <input class="form-control" asp-for="UserName" required />
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Email</label>
-                    <input class="form-control" asp-for="UserEmail" />
+                        <input class="form-control" asp-for="UserEmail" required />
                     <span asp-validation-for="UserEmail" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Password</label>
-                    <input class="form-control" type="password" asp-for="Password" />
+                        <input class="form-control" type="password" asp-for="Password" required />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Confirm Password</label>
-                    <input class="form-control" type="password" asp-for="ConfirmPassword" />
+                        <input class="form-control" type="password" asp-for="ConfirmPassword" required />
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Contact Number</label>
-                    <input class="form-control" asp-for="ContactNumber" />
+                        <input class="form-control" asp-for="ContactNumber" required />
                     <span asp-validation-for="ContactNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Address</label>
-                    <input class="form-control" asp-for="Address" />
+                        <input class="form-control" asp-for="Address" required />
                     <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
                 <div class="form-group">
