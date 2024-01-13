@@ -6,7 +6,10 @@
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <div class="row">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <div class="col-md-10 offset-md-1" style="border: 1px solid #000;">
         <div class="text-center">
              
@@ -74,7 +77,6 @@
                         </td>
 
                         <td class="align-middle">
-                            <a class="btn btn-outline-primary" asp-action="EditInventory" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a> |
                             <a class="btn btn-danger text-white" onclick="Delete(@item.Id)"><i class="bi bi-trash"></i>Delete </a>
                         </td>
                     </tr>
@@ -89,18 +91,48 @@
 @*@await Html.PartialAsync("_CreateItem", "Cinemas") *@
 
 <script>
-  
-
-    function Delete() {
-        // Your existing logic to add the item to the cart goes here
-
-        // Show SweetAlert
+    function Delete(itemId) {
+        // Confirm deletion with SweetAlert
         Swal.fire({
-            title: ' Inventory Deleted Successfully !',
-
-            icon: 'success',
-            confirmButtonText: 'OK',
-
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this inventory item!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, make an AJAX request to delete the item
+                $.ajax({
+                    url: '/Admin/DeleteAircraft', // Change the URL as needed
+                    type: 'POST',
+                    data: { aircraftId: itemId },
+                    success: function (response) {
+                        if (response.success) {
+                            // Reload the page or update the table as needed
+                            location.reload();
+                        } else {
+                            // Display an error message if deletion fails
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Cannot delete an item that already have orders',
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    },
+                    error: function () {
+                        // Display an error message if the AJAX request fails
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'An error occurred while processing the request.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
         });
     }
 </script>

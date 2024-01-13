@@ -18,6 +18,26 @@ namespace Raythos_Aerospace.Services
             _context = context;
         }
 
+        public async Task<bool> DeleteAircraftAsync(int aircraftId)
+        {
+            // Retrieve the aircraft from the database based on its ID
+            var aircraftToDelete = await _context.Aircrafts.FindAsync(aircraftId);
+
+            if (aircraftToDelete == null)
+            {
+                // Aircraft with the specified ID not found
+                return false;
+            }
+
+            // Remove the aircraft from the context
+            _context.Aircrafts.Remove(aircraftToDelete);
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<bool> CreateAircraftAsync(AircraftViewModel aircraftViewModel)
         {
             var aircraftEntity = new AircraftEntity

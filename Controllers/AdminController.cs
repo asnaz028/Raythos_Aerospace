@@ -24,6 +24,32 @@ namespace Raythos_Aerospace.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<JsonResult> DeleteAircraft(int aircraftId)
+        {
+            try
+            {
+                // Perform the aircraft deletion logic
+                var success = await _aircraftService.DeleteAircraftAsync(aircraftId);
+
+                if (success)
+                {
+                    return Json(new { success = true, message = "Aircraft deleted successfully" });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Error deleting aircraft" });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                return Json(new { success = false, message = "An error occurred while deleting aircraft" });
+            }
+        }
+
+
         public IActionResult Dashboard()
         {
             return View();
@@ -49,6 +75,8 @@ namespace Raythos_Aerospace.Controllers
         {
             return View();
         }
+
+
 
         [HttpPost]
         async public Task<IActionResult> AddInventory([FromForm] AircraftViewModel model)
