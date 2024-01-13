@@ -29,49 +29,49 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="control-label">Model Image</label>
-                            <input type="file" class="form-control-file" name="ModelImage" />
+                            <input type="file" class="form-control-file" name="ModelImage" required />
                             <span class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Model Name</label>
-                            <input class="form-control" asp-for="ModelName" />
+                            <input class="form-control" asp-for="ModelName" required />
                             <span asp-validation-for="ModelName" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Model Description</label>
-                            <input class="form-control" asp-for="ModelDescription" />
+                            <input class="form-control" asp-for="ModelDescription" required/>
                             <span asp-validation-for="ModelDescription" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">SKU</label>
-                            <input class="form-control" asp-for="SKU" />
+                            <input class="form-control" asp-for="SKU"  required/>
                             <span asp-validation-for="SKU" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Weight</label>
-                            <input class="form-control" asp-for="Weight" />
+                            <input class="form-control" asp-for="Weight" required />
                             <span asp-validation-for="Weight" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Base Price</label>
-                            <input class="form-control" asp-for="BasePrice" />
+                            <input class="form-control" asp-for="BasePrice" required />
                             <span asp-validation-for="BasePrice" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Max Price</label>
-                            <input class="form-control" asp-for="MaxPrice" />
+                            <input class="form-control" asp-for="MaxPrice" required />
                             <span asp-validation-for="MaxPrice" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">Model Price</label>
-                            <input class="form-control" asp-for="Price" />
+                            <input class="form-control" asp-for="Price"  required/>
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                     </div>
