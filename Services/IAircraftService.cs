@@ -13,7 +13,7 @@ namespace Raythos_Aerospace.Services
 
         Task<IEnumerable<AircraftEntity>> GetAircraftsAsync();
 
-        Task<IEnumerable<OrderEntity>> GetOrdersAsync();
+        Task<IEnumerable<OrderEntity>> GetOrdersAsync(string status);
 
         Task AddToCartAsync(int aircraftModelId, int userId, decimal price, string seatingConfiguration, string interiorDesign, string additionalFeatures, int quantity);
     }

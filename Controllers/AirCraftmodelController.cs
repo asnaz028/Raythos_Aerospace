@@ -30,7 +30,7 @@ namespace Raythos_Aerospace.Controllers
         }
         async public Task<IActionResult> ShoppingCart()
         {
-            var orders = await _aircraftService.GetOrdersAsync();
+            var orders = await _aircraftService.GetOrdersAsync("Cart");
             decimal totalPrice = orders.Sum(item => item.Price * item.Quantity);
 
             ViewBag.TotalPrice = totalPrice;

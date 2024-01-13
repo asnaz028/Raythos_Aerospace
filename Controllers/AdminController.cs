@@ -35,9 +35,10 @@ namespace Raythos_Aerospace.Controllers
 
             return View(users);
         }
-        public IActionResult ManageOrders()
+        async public Task<IActionResult> ManageOrders()
         {
-            return View();
+            var orders = await _aircraftService.GetOrdersAsync("Ordered");
+            return View(orders);
         }
         async public Task<IActionResult> ManageInventory()
         {

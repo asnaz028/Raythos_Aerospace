@@ -46,10 +46,10 @@ namespace Raythos_Aerospace.Services
         }
 
 
-        public async Task<IEnumerable<OrderEntity>> GetOrdersAsync()
+        public async Task<IEnumerable<OrderEntity>> GetOrdersAsync(string status)
         {
             var orders = await _context.Orders
-       .Where(o => o.OrderStatus == "Cart")
+       .Where(o => o.OrderStatus == status)
        .Include(o => o.AircraftModel)
        .ToListAsync();
 
@@ -70,11 +70,10 @@ namespace Raythos_Aerospace.Services
                 InteriorDesign = interiorDesign,
                 AdditionalFeatures = additionalFeatures,
                 Quantity = quantity
-                // Include other necessary properties
             };
 
             _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
+            _context.SaveChangesAsync();
         }
 
         public async Task<bool> EditAircraftAsync(AircraftEntity updatedAircraft)
