@@ -46,6 +46,8 @@
                             <a class="btn btn-danger text-white" onclick="Delete(@order.Id)">
                                 <i class="bi bi-trash"></i>Delete
                             </a>
+                            <a class="btn btn-outline-primary" asp-action="UpdateOrderStatus" asp-route-id="2"><i class="bi bi-pencil-square"></i>Edit Status </a>
+                            <a class="btn btn-outline-primary" asp-action="ShippingandDelivary" asp-route-id="2"><i class="bi bi-pencil-square"></i>Shipping & Delivary </a>
                         </td>
                     </tr>
                 }
