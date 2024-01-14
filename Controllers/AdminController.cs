@@ -160,11 +160,21 @@ namespace Raythos_Aerospace.Controllers
            
             return View();
         }
-        public IActionResult UpdateOrderStatus(int id)
+        public async Task<IActionResult> UpdateOrderStatus(int id)
         {
+           
+            var order = await _aircraftService.GetOrderById(id);
 
-            return View(id);
+            if (order != null)
+            {
+                return View(order);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
+
         public IActionResult ShippingandDelivary(int id)
         {
              

@@ -17,6 +17,10 @@ namespace Raythos_Aerospace.Services
 
         Task<bool> DeleteAircraftAsync(int aircraftId);
 
+        Task<bool> UpdateOrderStatus(int id, string status);
+
+        Task<OrderEntity> GetOrderById(int id);
+
         Task AddToCartAsync(int aircraftModelId, int userId, decimal price, string seatingConfiguration, string interiorDesign, string additionalFeatures, int quantity);
     }
 }

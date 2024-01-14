@@ -1,12 +1,10 @@
-﻿@*@using eTickets.Data.ViewModels;
-    @model RegisterVM;
-*@
+﻿@model Raythos_Aerospace.Models.entities.OrderEntity
+
 @{
     ViewData["Title"] = "Update Order Status";
-}
-@{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <div class="row">
     <div class="col-md-6 offset-3">
         <div class="text-center">
@@ -23,47 +21,42 @@
 
         <div class="row">
             <div class="col-md-8 offset-2" style="border: 1px solid #000;">
-                <form id="myForm" >
+                <form id="myForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group font-weight-bold">
-                        <label class="control-label">Order ID : 1</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="control-label">Order ID: @Model.Id</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
                     <div class="form-group font-weight-bold">
-                        <label class="control-label">Order Date : 23-11-2023</label><br />
+                        <label class="control-label">Order Date: @Model.OrderDate.ToString("dd-MM-yyyy")</label><br />
                     </div>
                     <div class="form-group font-weight-bold">
-                        <label class="control-label">Aircraft Model :  PPC Sprint Air ATR-72-500 1/100</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="control-label">Aircraft Model: @(Model.AircraftModel != null ? Model.AircraftModel.ModelName : "N/A")</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
                     <div class="form-group font-weight-bold">
-                        <label class="control-label">Price : 4500000</label>
+                        <label class="control-label">Price: @Model.Price</label>
                     </div>
                     <div class="form-row">
-
-
                         <div class="form-group">
                             <label class="control-label">Order Status</label>
                             <select class="form-control" id="orderStatus" name="orderStatus">
-                                <option value="pending">Pending</option>
-                                <option value="processing">Processing</option>
-                                <option value="processing">Ready To Dispatche</option>
-                                <option value="shipped">Dispatched</option>
-                                <option value="delivered">Delivered</option>
+                                <option value="pending" selected="@Model.OrderStatus == " pending"">Pending</option>
+                                <option value="processing" selected="@Model.OrderStatus == " processing"">Processing</option>
+                                <option value="readyToDispatch" selected="@Model.OrderStatus == " readyToDispatch"">Ready To Dispatch</option>
+                                <option value="shipped" selected="@Model.OrderStatus == " shipped"">Shipped</option>
+                                <option value="delivered" selected="@Model.OrderStatus == " delivered"">Delivered</option>
                             </select>
-                            <span class="text-danger"></span>
-                        </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="form-group">
-                            <label class="control-label">Estimated Delivery Date</label>
-                            <input class="form-control" type="date" required />
                             <span class="text-danger"></span>
                         </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-
+                        <div class="form-group">
+                            <label class="control-label">Estimated Delivery Date</label>
+                            <input class="form-control" type="date" value="@Model.EstimatedDeliveryDate.ToString("yyyy-MM-dd")" required />
+                            <span class="text-danger"></span>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
 
-
                     <div class="form-group">
-                        <input class="btn btn-outline-success  btn-block bg-info text-white" type="submit" onclick="update()" value="Update" />
-
+                        <input class="btn btn-outline-success btn-block bg-info text-white" type="submit" onclick="update()" value="Update" />
                     </div>
                 </form>
             </div>
@@ -74,15 +67,11 @@
     document.getElementById('myForm').addEventListener('submit', function (e) {
         e.preventDefault(); // Prevent the default form submission
 
-
         // Display Sweet Alert
         Swal.fire({
             title: 'Order Status Updated Successfully !',
-
             icon: 'success',
             confirmButtonText: 'OK'
         });
-
-
     });
 </script>

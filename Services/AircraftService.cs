@@ -124,6 +124,49 @@ namespace Raythos_Aerospace.Services
             return true;
         }
 
+        public async Task<bool> UpdateOrderStatus(int id, string status)
+        {
+            try
+            {
+
+                var order = await _context.Orders.FindAsync(id);
+
+
+                if (order != null)
+                {
+
+                    order.OrderStatus = "UpdatedStatus";
+
+
+                    await _context.SaveChangesAsync();
+
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
+        public async Task<OrderEntity> GetOrderById(int id)
+        {
+            try
+            {
+                var order = await _context.Orders
+            .Include(o => o.AircraftModel)
+            .FirstOrDefaultAsync(o => o.Id == id);
+
+                return order;
+            }
+            catch (Exception)
+            {
+                return null; 
+            }
+        }
 
     }
 
